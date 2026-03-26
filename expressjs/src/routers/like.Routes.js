@@ -3,16 +3,13 @@ import { likeController } from "../controllers/like.Controller.js";
 const likeRouter = express.Router();
 
 // 👉 Like nhà hàng
-likeRouter.post("/", likeController.likeRestaurant);
-
-// 👉 Unlike
-likeRouter.delete("/", likeController.unlikeRestaurant);
-
+likeRouter.post("/", likeController.like);
 // 👉 Lấy danh sách like theo nhà hàng
-likeRouter.get("/restaurant/:restaurantId", likeController.getLikesByRestaurant);
+likeRouter.get("/restaurant/:restaurantId", likeController.getByRestaurant);
 
 // 👉 Lấy danh sách like theo user 
-likeRouter.get("/user/:userId", likeController.getLikesByUser);
+likeRouter.get("/user/:userId", likeController.getByUser);
+
 
 
 export default likeRouter;

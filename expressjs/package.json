@@ -8,21 +8,25 @@
     "dev": "nodemon src/server.js",
     "start": "node src/server.js",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "prisma": "npx prisma db pull && npx prisma generate"
+    "prisma": "npm run prisma:generate",
+    "prisma:generate": "npx prisma generate",
+    "prisma:pull": "npx prisma db pull",
+    "prisma:push": "npx prisma db push"
   },
   "dependencies": {
     "@prisma/adapter-mariadb": "^7.5.0",
-    "@prisma/client": "^7.5.0",
+    "@prisma/client": "^6.19.2",
     "bcrypt": "^6.0.0",
     "cors": "^2.8.6",
     "dotenv": "^17.3.1",
     "express": "^5.2.1",
+    "generate": "^0.14.0",
     "mysql2": "^3.20.0",
     "nodemon": "^3.1.14",
+    "prisma": "^6.19.2",
     "sequelize": "^6.37.8"
   },
   "devDependencies": {
-    "@types/node": "^25.5.0",
-    "prisma": "^7.5.0"
+    "@types/node": "^25.5.0"
   }
 }

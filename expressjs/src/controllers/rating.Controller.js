@@ -1,4 +1,4 @@
-import { responseSuccess } from "../common/middlewares/helpers/response.helpers.js";
+import { responseSuccess } from "../common/helpers/response.helper.js";
 import ratingService from "../services/rating.Service.js";
 
 
