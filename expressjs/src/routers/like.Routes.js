@@ -5,10 +5,10 @@ const likeRouter = express.Router();
 // 👉 Like nhà hàng
 likeRouter.post("/", likeController.like);
 // 👉 Lấy danh sách like theo nhà hàng
-likeRouter.get("/restaurant/:restaurantId", likeController.getByRestaurant);
+likeRouter.get("/restaurant/:id", likeController.getByRestaurant);
 
 // 👉 Lấy danh sách like theo user 
-likeRouter.get("/user/:userId", likeController.getByUser);
+likeRouter.get("/user/:id", likeController.getByUser);
 
 
 

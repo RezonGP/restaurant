@@ -4,23 +4,19 @@ export const likeService = {
 
     async like(req) {
         const body = req.body ?? {};
-        const { userId, restaurantId } = body;
+        const { user_id, restaurant_id } = req.body;
 
-        console.log("KEYS:", Object.keys(prisma));
-        console.log(body);
-
-        if (userId == null || restaurantId == null) {
-            throw new BadRequestException("userId và restaurantId là bắt buộc");
+        if (user_id == null || restaurant_id == null) {
+            throw new BadRequestException("user_id và restaurant_id là bắt buộc");
         }
 
-        const userIdNumber = Number(userId);
-        const restaurantIdNumber = Number(restaurantId);
+        const userIdNumber = Number(user_id);
+        const restaurantIdNumber = Number(restaurant_id);
 
         if (Number.isNaN(userIdNumber) || Number.isNaN(restaurantIdNumber)) {
-            throw new BadRequestException("userId và restaurantId phải là số");
+            throw new BadRequestException("user_id và restaurant_id phải là số");
         }
 
-        // 🔥 THÊM ĐOẠN NÀY
         const user = await prisma.user.findUnique({
             where: { id: userIdNumber }
         });
@@ -40,16 +36,16 @@ export const likeService = {
         // ✅ code cũ của bạn
         const existingLike = await prisma.likeRes.findFirst({
             where: {
-                userId: userIdNumber,
-                restaurantId: restaurantIdNumber,
+                user_id: userIdNumber,
+                restaurant_id: restaurantIdNumber,
             }
         });
 
         if (existingLike) {
             await prisma.likeRes.deleteMany({
                 where: {
-                    userId: userIdNumber,
-                    restaurantId: restaurantIdNumber,
+                    user_id: userIdNumber,
+                    restaurant_id: restaurantIdNumber,
                 },
             });
             return true;
@@ -57,18 +53,32 @@ export const likeService = {
 
         await prisma.likeRes.create({
             data: {
-                userId: userIdNumber,
-                restaurantId: restaurantIdNumber,
+                user_id: userIdNumber,
+                restaurant_id: restaurantIdNumber,
             },
         });
 
-        return "Like restaurant successfully";
+        return true;
     },
     async getByRestaurant(req) {
-        return " like thanh cong"
+        const body = req.body ?? {};
+        const { id: restaurant_id } = req.params;
+        const likeRes = await prisma.likeRes.findMany({
+            where: {
+                restaurant_id: Number(restaurant_id),
+            }
+        });
+        return likeRes;
     },
     async getByUser(req) {
-        return " like thanh cong"
+        const body = req.body ?? {};
+        const { id: user_id } = req.params;
+        const likeRes = await prisma.likeRes.findMany({
+            where: {
+                user_id: Number(user_id),
+            }
+        });
+        return likeRes;
     },
 
 
