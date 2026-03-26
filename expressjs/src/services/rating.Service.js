@@ -38,10 +38,25 @@ export const ratingService = {
         return true;
     },
     async getRatingsByRestaurant(req) {
-        return "get ratings by restaurant thanh cong"
+        const params = req.params ?? {};
+        const { restaurant_id } = params;
+        const rateRes = await prisma.rate_res.findMany({
+            where: {
+                restaurant_id: Number(restaurant_id),
+            },
+        });
+        return rateRes
     },
     async getRatingsByUser(req) {
-        return "get ratings by user thanh cong"
+        const params = req.params ?? {};
+        const { user_id } = params;
+        console.log(user_id);
+        const rateRes = await prisma.rate_res.findMany({
+            where: {
+                user_id: Number(user_id),
+            },
+        });
+        return rateRes
     }
 }
 

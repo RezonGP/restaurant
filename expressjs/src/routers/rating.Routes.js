@@ -6,9 +6,9 @@ const ratingRouter = express.Router();
 ratingRouter.post("/", ratingController.createRating);
 
 // 👉 Lấy theo nhà hàng
-ratingRouter.get("/restaurant/:restaurantId", ratingController.getRatingsByRestaurant);
+ratingRouter.get("/restaurant/:restaurant_id", ratingController.getRatingsByRestaurant);
 
 // 👉 Lấy theo user
-ratingRouter.get("/user/:userId", ratingController.getRatingsByUser);
+ratingRouter.get("/user/:user_id", ratingController.getRatingsByUser);
 
 export default ratingRouter;
